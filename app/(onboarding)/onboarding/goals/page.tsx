@@ -2,22 +2,19 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { Card } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import { ProgressBar } from '@/components/ui/ProgressBar'
 import { saveOnboarding } from '@/lib/onboarding-store'
 
 const GOALS = [
-  { id: 'acne',       label: 'Clear acne',         emoji: '✦' },
-  { id: 'hydration',  label: 'Deep hydration',      emoji: '◈' },
-  { id: 'antiaging',  label: 'Anti-aging',          emoji: '◇' },
-  { id: 'brighten',   label: 'Brighter skin',       emoji: '○' },
-  { id: 'sensitive',  label: 'Calm sensitivity',    emoji: '◉' },
-  { id: 'pores',      label: 'Minimize pores',      emoji: '◌' },
+  { id: 'acne',      label: 'Clear acne',       desc: 'Reduce breakouts and congestion' },
+  { id: 'hydration', label: 'Deep hydration',   desc: 'Plump, dewy skin all day' },
+  { id: 'antiaging', label: 'Anti-aging',        desc: 'Smooth fine lines and firm skin' },
+  { id: 'brighten',  label: 'Brighter skin',    desc: 'Even tone and radiant glow' },
+  { id: 'sensitive', label: 'Calm sensitivity', desc: 'Reduce redness and irritation' },
+  { id: 'pores',     label: 'Minimize pores',   desc: 'Refined texture and clarity' },
 ]
 
 export default function GoalsPage() {
-  const router  = useRouter()
+  const router = useRouter()
   const [selected, setSelected] = useState<string[]>([])
 
   const toggle = (id: string) =>
@@ -29,33 +26,77 @@ export default function GoalsPage() {
   }
 
   return (
-    <Card className="max-w-[560px] mx-auto">
-      <ProgressBar step={1} total={3} />
-      <p className="text-xs font-semibold text-[#7aabcf] uppercase tracking-widest mb-2">Step 1 of 3</p>
-      <h2 className="font-['Cormorant_Garamond'] text-[36px] font-bold text-[#1a3a5c] leading-tight mb-1">
-        What are your skin goals?
-      </h2>
-      <p className="text-sm text-[#7aabcf] mb-8">Select all that apply.</p>
-
-      <div className="grid grid-cols-2 gap-3 mb-8">
-        {GOALS.map(g => (
-          <button
-            key={g.id}
-            onClick={() => toggle(g.id)}
-            className={`flex items-center gap-3 p-4 rounded-2xl border-[1.5px] text-left transition-all
-              ${selected.includes(g.id)
-                ? 'border-[#1a3a5c] bg-[#eef7fd] text-[#1a3a5c]'
-                : 'border-[#c3dff2] bg-white text-[#1a3a5c] hover:bg-[#eef7fd]'}`}
-          >
-            <span className="text-lg">{g.emoji}</span>
-            <span className="text-sm font-medium">{g.label}</span>
-          </button>
+    <div className="w-full max-w-[640px]">
+      {/* Progress */}
+      <div className="flex gap-1.5 mb-10">
+        {[1, 2, 3].map(i => (
+          <div key={i} className="h-1 flex-1 rounded-full transition-all"
+            style={{ background: i <= 1 ? '#1a3a5c' : '#c3dff2' }} />
         ))}
       </div>
 
-      <Button size="lg" onClick={next} disabled={selected.length === 0}>
+      <p className="text-xs font-semibold text-[#5a85aa] uppercase tracking-widest mb-3">Step 1 of 3</p>
+      <h1 className="text-4xl font-black text-[#1a3a5c] leading-tight mb-2">
+        What are your<br />skin goals?
+      </h1>
+      <p className="text-[#5a85aa] mb-10">Select everything that matters to you.</p>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-10">
+        {GOALS.map(g => {
+          const active = selected.includes(g.id)
+          return (
+            <button
+              key={g.id}
+              onClick={() => toggle(g.id)}
+              className="flex items-center gap-4 p-5 rounded-2xl text-left transition-all duration-200 cursor-pointer"
+              style={{
+                background: active ? '#1a3a5c' : 'white',
+                boxShadow: active
+                  ? '0 8px 32px rgba(26,58,92,0.18)'
+                  : '0 2px 12px rgba(30,100,180,0.06)',
+                border: active ? 'none' : '1px solid #e8f0f8',
+                transform: active ? 'translateY(-1px)' : undefined,
+              }}
+            >
+              <div
+                className="w-5 h-5 rounded-full shrink-0 flex items-center justify-center transition-all"
+                style={{
+                  background: active ? 'rgba(255,255,255,0.2)' : '#eef7fd',
+                  border: active ? 'none' : '1.5px solid #c3dff2',
+                }}
+              >
+                {active && (
+                  <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                    <path d="M2 5l2 2 4-4" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
+              </div>
+              <div>
+                <p className="text-sm font-semibold" style={{ color: active ? 'white' : '#1a3a5c' }}>
+                  {g.label}
+                </p>
+                <p className="text-xs mt-0.5" style={{ color: active ? 'rgba(255,255,255,0.6)' : '#5a85aa' }}>
+                  {g.desc}
+                </p>
+              </div>
+            </button>
+          )
+        })}
+      </div>
+
+      <button
+        onClick={next}
+        disabled={selected.length === 0}
+        className="w-full py-4 rounded-2xl text-sm font-semibold transition-all cursor-pointer disabled:opacity-40"
+        style={{ background: '#1a3a5c', color: 'white' }}
+      >
         Continue →
-      </Button>
-    </Card>
+      </button>
+      {selected.length > 0 && (
+        <p className="text-center text-xs text-[#5a85aa] mt-3">
+          {selected.length} goal{selected.length > 1 ? 's' : ''} selected
+        </p>
+      )}
+    </div>
   )
 }

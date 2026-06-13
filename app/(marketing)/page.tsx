@@ -236,7 +236,7 @@ export default function LandingPage() {
         </div>
       </section>
 
-      {/* ─── FEATURES ─── */}
+      {/* ─── FEATURES BENTO ─── */}
       <section id="features" className="py-28 px-6 bg-white/60">
         <div className="max-w-[1200px] mx-auto">
           <div className="max-w-xl mb-16">
@@ -248,20 +248,108 @@ export default function LandingPage() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {FEATURES.map(({ label, desc }) => (
-              <div
-                key={label}
-                className="bg-white rounded-2xl p-7"
-                style={{ boxShadow: '0 4px 24px rgba(30,100,180,0.06)', border: '1px solid #eef7fd' }}
-              >
-                <div className="w-8 h-8 rounded-lg bg-[#d6eaf8] flex items-center justify-center mb-4">
-                  <Image src="/logo.svg" alt="" width={16} height={16} />
-                </div>
-                <h3 className="font-bold text-[#1a3a5c] mb-2">{label}</h3>
-                <p className="text-sm leading-relaxed text-[#5a85aa]">{desc}</p>
+          {/* Bento grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 auto-rows-auto">
+
+            {/* Large: AI scan — spans 2 cols */}
+            <div
+              className="md:col-span-2 rounded-3xl p-8 flex flex-col justify-between min-h-[280px] relative overflow-hidden"
+              style={{ background: '#1a3a5c' }}
+            >
+              <div className="absolute -right-12 -top-12 w-64 h-64 rounded-full opacity-10"
+                style={{ background: 'radial-gradient(circle, white 0%, transparent 70%)' }} />
+              <div>
+                <p className="text-xs font-semibold text-[rgba(255,255,255,0.45)] uppercase tracking-widest mb-4">AI skin scan</p>
+                <h3 className="text-2xl font-black text-white leading-tight max-w-sm">
+                  One photo. A full read of everything happening on your skin.
+                </h3>
               </div>
-            ))}
+              <div className="flex gap-3 mt-6">
+                {['Skin type', 'Hydration', 'Concerns', 'Fitzpatrick tone'].map(t => (
+                  <span key={t} className="text-xs font-medium px-3 py-1.5 rounded-full"
+                    style={{ background: 'rgba(255,255,255,0.12)', color: 'rgba(255,255,255,0.7)' }}>
+                    {t}
+                  </span>
+                ))}
+              </div>
+            </div>
+
+            {/* Glow Score */}
+            <div
+              className="rounded-3xl p-8 flex flex-col justify-between min-h-[280px]"
+              style={{ background: 'white', border: '1px solid #e8f0f8', boxShadow: '0 4px 24px rgba(30,100,180,0.06)' }}
+            >
+              <p className="text-xs font-semibold text-[#5a85aa] uppercase tracking-widest">Glow Score</p>
+              <div>
+                <p className="text-7xl font-black text-[#1a3a5c] leading-none">72</p>
+                <div className="mt-3 h-2 bg-[#eef7fd] rounded-full overflow-hidden">
+                  <div className="h-full bg-[#1a3a5c] rounded-full" style={{ width: '72%' }} />
+                </div>
+                <p className="text-xs text-[#5a85aa] mt-2">Weekly check-ins track real progress</p>
+              </div>
+            </div>
+
+            {/* Routine preview */}
+            <div
+              className="rounded-3xl p-8 flex flex-col gap-5"
+              style={{ background: '#eef7fd', border: '1px solid #d6eaf8' }}
+            >
+              <p className="text-xs font-semibold text-[#5a85aa] uppercase tracking-widest">AM routine</p>
+              <div className="flex flex-col gap-3">
+                {['Gentle cleanser', 'Niacinamide serum', 'Broad-spectrum SPF'].map((s, i) => (
+                  <div key={s} className="flex items-center gap-3">
+                    <span className="w-6 h-6 rounded-full bg-[#1a3a5c] text-white text-[10px] font-bold flex items-center justify-center shrink-0">
+                      {i + 1}
+                    </span>
+                    <span className="text-sm font-medium text-[#1a3a5c]">{s}</span>
+                  </div>
+                ))}
+              </div>
+              <p className="text-xs text-[#5a85aa]">+ matching PM routine built for you</p>
+            </div>
+
+            {/* Budget matching */}
+            <div
+              className="rounded-3xl p-8 flex flex-col justify-between"
+              style={{ background: 'white', border: '1px solid #e8f0f8', boxShadow: '0 4px 24px rgba(30,100,180,0.06)' }}
+            >
+              <div>
+                <p className="text-xs font-semibold text-[#5a85aa] uppercase tracking-widest mb-4">Product matching</p>
+                <h3 className="text-lg font-black text-[#1a3a5c] leading-tight">
+                  Picks that fit your budget. Filtered by what your skin actually needs.
+                </h3>
+              </div>
+              <div className="flex flex-wrap gap-2 mt-5">
+                {['Under $30', '$30–75', '$75–150', '$150+'].map(b => (
+                  <span key={b} className="text-xs font-medium px-3 py-1.5 rounded-full bg-[#eef7fd] text-[#1a3a5c]">{b}</span>
+                ))}
+              </div>
+            </div>
+
+            {/* Ingredient breakdown — spans remaining */}
+            <div
+              className="rounded-3xl p-8 flex flex-col justify-between"
+              style={{ background: 'white', border: '1px solid #e8f0f8', boxShadow: '0 4px 24px rgba(30,100,180,0.06)' }}
+            >
+              <div>
+                <p className="text-xs font-semibold text-[#5a85aa] uppercase tracking-widest mb-4">Ingredient breakdown</p>
+                <h3 className="text-lg font-black text-[#1a3a5c] leading-tight">
+                  Know exactly what each product does — and why it is in your routine.
+                </h3>
+              </div>
+              <div className="mt-5 flex flex-col gap-2">
+                {[['Niacinamide', 'Brightening + pore-tightening'], ['Hyaluronic acid', 'Deep hydration barrier']].map(([ing, why]) => (
+                  <div key={ing} className="flex items-start gap-2">
+                    <div className="w-1.5 h-1.5 rounded-full bg-[#5a85aa] mt-1.5 shrink-0" />
+                    <div>
+                      <span className="text-xs font-semibold text-[#1a3a5c]">{ing} </span>
+                      <span className="text-xs text-[#5a85aa]">{why}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
