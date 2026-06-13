@@ -3,6 +3,7 @@ import { SignUp } from '@clerk/nextjs'
 export default function SignUpPage() {
   return (
     <SignUp
+      forceRedirectUrl="/scan/photo"
       appearance={{
         variables: {
           colorPrimary:         '#1a3a5c',

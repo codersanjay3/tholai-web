@@ -12,11 +12,11 @@ const SENSITIVITY_LABELS = ['None', 'Mild', 'Moderate', 'High', 'Very high']
 
 export default function BasicsPage() {
   const router       = useRouter()
-  const [age, setAge]           = useState('')
+  const [ageIndex, setAgeIndex]  = useState<number>(2)
   const [sensitivity, setSens]  = useState(1)
 
   const next = () => {
-    saveOnboarding({ ageRange: age, sensitivity })
+    saveOnboarding({ ageRange: AGE_RANGES[ageIndex], sensitivity })
     router.push('/sign-up')
   }
 
@@ -31,20 +31,20 @@ export default function BasicsPage() {
 
       <div className="mb-8">
         <p className="text-xs font-semibold text-[#7aabcf] uppercase tracking-wider mb-3">Age range</p>
-        <div className="flex gap-2 flex-wrap">
-          {AGE_RANGES.map(a => (
-            <button
-              key={a}
-              onClick={() => setAge(a)}
-              className={`px-5 py-2 rounded-full border-[1.5px] text-sm font-medium transition-all
-                ${age === a
-                  ? 'border-[#1a3a5c] bg-[#eef7fd] text-[#1a3a5c]'
-                  : 'border-[#c3dff2] text-[#7aabcf] hover:bg-[#eef7fd]'}`}
-            >
-              {a}
-            </button>
-          ))}
+        <div className="flex items-center justify-between mb-2">
+          <span className="text-xs text-[#7aabcf]">Teens</span>
+          <span className="text-sm font-semibold text-[#1a3a5c]">{AGE_RANGES[ageIndex]}</span>
+          <span className="text-xs text-[#7aabcf]">50s+</span>
         </div>
+        <input
+          type="range"
+          min={0}
+          max={4}
+          step={1}
+          value={ageIndex}
+          onChange={e => setAgeIndex(Number(e.target.value))}
+          className="w-full accent-[#1a3a5c]"
+        />
       </div>
 
       <div className="mb-8">
@@ -61,7 +61,7 @@ export default function BasicsPage() {
         </div>
       </div>
 
-      <Button size="lg" onClick={next} disabled={!age}>
+      <Button size="lg" onClick={next}>
         Create my free account →
       </Button>
     </Card>
