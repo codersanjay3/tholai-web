@@ -1,11 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&display=swap');
 @import "tailwindcss";
 
 :root {
   --bg:      #d6eaf8;
   --surface: #ffffff;
   --text:    #1a3a5c;
-  --muted:   #7aabcf;
+  --muted:   #5a85aa;
   --border:  #c3dff2;
   --hover:   #eef7fd;
   --shadow:  0 4px 24px rgba(30, 100, 180, 0.07);
@@ -16,10 +15,18 @@
 body {
   background: var(--bg);
   color: var(--text);
-  font-family: 'DM Sans', sans-serif;
+  font-family: var(--font-epilogue, system-ui, sans-serif);
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, .display {
-  font-family: 'Cormorant Garamond', serif;
+h1, h2, h3 {
+  font-family: var(--font-epilogue, system-ui, sans-serif);
+  text-wrap: balance;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }
