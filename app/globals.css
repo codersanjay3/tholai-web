@@ -1,6 +1,26 @@
 @import "tailwindcss";
 
+/* ── Tailwind v4 semantic color theme (shadcn-compatible) ── */
+@theme {
+  --color-primary:              #1a3a5c;
+  --color-primary-foreground:   #ffffff;
+  --color-secondary:            #eef7fd;
+  --color-secondary-foreground: #1a3a5c;
+  --color-background:           #ffffff;
+  --color-foreground:           #1a3a5c;
+  --color-muted:                #eef7fd;
+  --color-muted-foreground:     #5a85aa;
+  --color-accent:               #eef7fd;
+  --color-accent-foreground:    #1a3a5c;
+  --color-destructive:          #dc2626;
+  --color-destructive-foreground: #ffffff;
+  --color-border:               #c3dff2;
+  --color-input:                #c3dff2;
+  --color-ring:                 #1a3a5c;
+}
+
 :root {
+  /* Legacy tholai tokens */
   --bg:      #d6eaf8;
   --surface: #ffffff;
   --text:    #1a3a5c;
@@ -8,6 +28,18 @@
   --border:  #c3dff2;
   --hover:   #eef7fd;
   --shadow:  0 4px 24px rgba(30, 100, 180, 0.07);
+
+  /* For shadcn components that use hsl(var(--*)) */
+  --primary:             210 55% 23%;
+  --primary-foreground:  0 0% 100%;
+  --secondary:           208 87% 96%;
+  --secondary-foreground: 210 55% 23%;
+  --muted-foreground:    210 31% 51%;
+  --accent-foreground:   210 55% 23%;
+  --background:          0 0% 100%;
+  --foreground:          210 55% 23%;
+  --card:                0 0% 100%;
+  --card-foreground:     210 55% 23%;
 }
 
 * { box-sizing: border-box; }

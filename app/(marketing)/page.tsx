@@ -3,15 +3,63 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import { useRouter } from 'next/navigation'
+import { Pricing, type PricingPlan } from '@/components/blocks/pricing'
 
-const FEATURES = [
-  { label: 'AI skin scan', desc: 'One photo. Full breakdown of skin type, texture, hydration, and active concerns — in under 30 seconds.' },
-  { label: 'Personalised routines', desc: 'AM and PM steps built around your actual skin, goals, and the budget you told us about.' },
-  { label: 'Product matching', desc: 'Ingredient-aware recommendations filtered by price. No padding. No affiliate noise.' },
-  { label: 'Glow Score', desc: 'Weekly photo check-ins track measurable progress over time so you know what is actually working.' },
-  { label: 'Concern tracking', desc: 'Hyperpigmentation, acne, dryness, sensitivity — each concern scored and monitored over time.' },
-  { label: 'Routine updates', desc: 'Skin changes with age and season. Your routine syncs automatically.' },
+const THOLAI_PLANS: PricingPlan[] = [
+  {
+    name: 'Free',
+    price: '0',
+    yearlyPrice: '0',
+    period: 'month',
+    features: [
+      '1 AI skin scan',
+      'Basic skin type report',
+      'Starter AM/PM routine',
+      'Top 3 product picks',
+    ],
+    description: 'No credit card required',
+    buttonText: 'Start for free',
+    href: '/onboarding/goals',
+    isPopular: false,
+  },
+  {
+    name: 'Pro',
+    price: '9',
+    yearlyPrice: '7',
+    period: 'month',
+    features: [
+      'Unlimited AI scans',
+      'Full concern analysis',
+      'Complete personalised routines',
+      'Unlimited product matching',
+      'Glow Score + photo timeline',
+      'Ingredient deep-dives',
+      'Routine auto-updates',
+    ],
+    description: '14-day free trial, cancel anytime',
+    buttonText: 'Start free trial',
+    href: '/onboarding/goals',
+    isPopular: true,
+  },
+  {
+    name: 'Family',
+    price: '19',
+    yearlyPrice: '15',
+    period: 'month',
+    features: [
+      'Everything in Pro',
+      'Up to 5 skin profiles',
+      'Shared product lists',
+      'Family routine dashboard',
+      'Priority support',
+    ],
+    description: 'Up to 5 members per account',
+    buttonText: 'Get Family plan',
+    href: '/onboarding/goals',
+    isPopular: false,
+  },
 ]
+
 
 const PRICING = [
   {
@@ -51,7 +99,7 @@ export default function LandingPage() {
   const router = useRouter()
 
   return (
-    <div className="w-full overflow-x-hidden">
+    <div className="w-full overflow-x-hidden" style={{ position: 'relative', zIndex: 1 }}>
 
       {/* ─── HERO ─── */}
       <section className="relative min-h-[90vh] flex items-center">
@@ -355,60 +403,12 @@ export default function LandingPage() {
       </section>
 
       {/* ─── PRICING ─── */}
-      <section id="pricing" className="py-28 px-6">
-        <div className="max-w-[1200px] mx-auto">
-          <div className="max-w-xl mb-16">
-            <h2 className="text-[clamp(2rem,3.5vw,3rem)] font-black leading-tight tracking-tight text-[#1a3a5c] mb-4">
-              Simple pricing
-            </h2>
-            <p className="text-base text-[#5a85aa]">Start free. Upgrade when you are ready for the full picture.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 gap-6 max-w-3xl">
-            {PRICING.map(({ name, price, period, dark, features, cta, href }) => (
-              <div
-                key={name}
-                className="rounded-2xl p-8 flex flex-col gap-7"
-                style={{
-                  background: dark ? '#1a3a5c' : 'white',
-                  boxShadow: dark ? '0 24px 48px rgba(26,58,92,0.25)' : '0 4px 24px rgba(30,100,180,0.06)',
-                  border: dark ? 'none' : '1px solid #eef7fd',
-                }}
-              >
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest mb-4" style={{ color: dark ? 'rgba(255,255,255,0.45)' : '#5a85aa' }}>{name}</p>
-                  <div className="flex items-baseline gap-1">
-                    <span className="text-5xl font-black" style={{ color: dark ? '#fff' : '#1a3a5c' }}>{price}</span>
-                    <span className="text-sm" style={{ color: dark ? 'rgba(255,255,255,0.45)' : '#5a85aa' }}>{period}</span>
-                  </div>
-                </div>
-
-                <ul className="flex flex-col gap-3">
-                  {features.map(f => (
-                    <li key={f} className="flex items-start gap-2.5 text-sm">
-                      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" className="mt-0.5 shrink-0">
-                        <circle cx="8" cy="8" r="8" fill={dark ? 'rgba(255,255,255,0.1)' : '#eef7fd'} />
-                        <path d="M5 8l2 2 4-4" stroke={dark ? '#fff' : '#5a85aa'} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                      <span style={{ color: dark ? 'rgba(255,255,255,0.85)' : '#1a3a5c' }}>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <Link
-                  href={href}
-                  className="mt-auto text-center text-sm font-semibold py-3.5 rounded-xl transition-all"
-                  style={{
-                    background: dark ? 'white' : '#1a3a5c',
-                    color: dark ? '#1a3a5c' : 'white',
-                  }}
-                >
-                  {cta}
-                </Link>
-              </div>
-            ))}
-          </div>
-        </div>
+      <section id="pricing" className="py-28">
+        <Pricing
+          plans={THOLAI_PLANS}
+          title="Simple pricing"
+          description="Start free. Upgrade when you are ready for the full picture."
+        />
       </section>
 
       {/* ─── CTA BAND ─── */}
