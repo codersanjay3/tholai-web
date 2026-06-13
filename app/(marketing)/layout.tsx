@@ -1,11 +1,10 @@
 import { Nav } from '@/components/ui/Nav'
-import { PageWrapper } from '@/components/ui/PageWrapper'
 
 export default function MarketingLayout({ children }: { children: React.ReactNode }) {
   return (
-    <PageWrapper>
+    <div className="min-h-screen bg-[#d6eaf8]">
       <Nav />
       {children}
-    </PageWrapper>
+    </div>
   )
 }

@@ -1,7 +1,7 @@
 export interface OnboardingData {
   goals:       string[]
   budget:      string
-  ageRange:    string
+  age:         number
   sensitivity: number
 }
 

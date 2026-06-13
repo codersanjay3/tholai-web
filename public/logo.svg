@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" fill="none">
+  <!-- Water droplet outline: large teardrop loop -->
+  <path
+    d="M60 18 C60 18 30 48 30 70 C30 87 43.4 100 60 100 C76.6 100 90 87 90 70 C90 48 60 18 60 18 Z"
+    stroke="currentColor"
+    stroke-width="5"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <!-- Leaf at top right of droplet -->
+  <path
+    d="M64 30 C72 22 82 24 82 24 C82 24 82 34 74 40 C66 46 60 42 60 42 C60 42 56 38 64 30 Z"
+    stroke="currentColor"
+    stroke-width="4"
+    stroke-linejoin="round"
+    fill="none"
+  />
+  <!-- Leaf vein -->
+  <path
+    d="M64 30 L74 40"
+    stroke="currentColor"
+    stroke-width="3"
+    stroke-linecap="round"
+    fill="none"
+  />
+</svg>
