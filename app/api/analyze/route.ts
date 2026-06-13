@@ -1,7 +1,7 @@
 import { auth } from '@clerk/nextjs/server'
 import { NextRequest, NextResponse } from 'next/server'
 import { generateText, Output } from 'ai'
-import { anthropic } from '@ai-sdk/anthropic'
+import { google } from '@ai-sdk/google'
 import { z } from 'zod'
 import { supabaseAdmin } from '@/lib/supabase.server'
 
@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
 
   try {
     const { output: analysis } = await generateText({
-      model: anthropic('claude-haiku-4-5'),
+      model: google('gemini-2.0-flash'),
       output: Output.object({ schema: AnalysisSchema }),
       messages: [
         {
